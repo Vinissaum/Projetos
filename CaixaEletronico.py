@@ -1,7 +1,7 @@
 import datetime
 
 arquivo = './arquivo.txt'
-
+transacoes = './transações.txt'
 bancos = 'BANCOS DISPONIVEIS'
 cadastrar = 'TELA DE CADASTRO'
 
@@ -10,7 +10,6 @@ def inicio():
     print(cadastrar.center(50), '\n')
     add()
     traco() 
-
 
 def traco():
     traco = '*'
@@ -64,16 +63,58 @@ def add():
     
     cadastro.write('\n')
     from datetime import datetime
-    hora = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+    hora = datetime.now().strftime('%d-%m-%Y')
 
-    comprovante = open('transações.txt', 'a', encoding='UTF-8')
+    comprovante = open(transacoes, 'a', encoding='UTF-8')
     comprovante.writable()
     if(saqdep == 1):
-        comprovante.writelines('Nome: {}\nConta: {}\nBanco: {}\nsaldo anterior: {}\nSaque: {}\nNovo saldo: {}\nHorario da transação: {}\n'.format(nome, conta, bco, saldo, saq, nsaldo, hora))
+        comprovante.writelines('Nome: {};Conta: {};Banco: {};saldo anterior: {};Saque: {};Novo saldo: {};Horario da transação: {};'.format(nome, conta, bco, saldo, saq, nsaldo, hora))
     else:
-        comprovante.writelines('Nome: {}\nConta: {}\nBanco: {}\nsaldo anterior: {}\nDeposito: {}\nNovo saldo: {}\nHorario da transação: {}\n'.format(nome, conta, bco, saldo, dep, nsaldo, hora))
+        comprovante.writelines('Nome: {};Conta: {};Banco: {};saldo anterior: {};Deposito: {};Novo saldo: {};Horario da transação: {};'.format(nome, conta, bco, saldo, dep, nsaldo, hora))
     comprovante.write('\n')
     comprovante.close()
     cadastro.close()
 
-inicio()
+def verTransacoes():
+    t = open(transacoes, 'r', encoding='UTF-8')
+    for dados in t:
+        print(dados.replace(';', '\n'), end = '')
+    t.close
+
+def menuPrincipal():
+    menu = 'MENU PRINCIPAL'
+    traco()
+    print(menu.center(50),'\n\n')
+    print('1 - NOVA OPERAÇÃO\n')
+    print('2 - VER EXTRATO DAS OPERAÇÕES ANTERIORES\n')
+    print('3 - SAIR DO PROGRAMA\n')
+    print('\n')
+    traco()
+    opc = int(input('Escolha uma opcão: '))
+    if(opc == 1):
+        inicio()
+    elif(opc == 2):
+        verTransacoes()
+    elif(opc == 3):
+        print('Até a proxima!')
+    else:
+        print('Digite uma opção válida!')
+
+def separador():
+    separar = open(transacoes, 'r', encoding='UTF-8')
+    
+    soma = 0
+    from datetime import datetime
+    hora = datetime.now().strftime('%d-%m-%Y')
+    for itens in separar:
+       dado = itens.split(';')
+       h = str(dado[6].replace('Horario da transação: ', ''))
+       if('Saque: ' in itens and hora == h):
+           d = float(dado[4].replace('Saque: ', ''))
+           soma = soma + d
+    
+    print('A soma de todos os saques do dia {} é igual a {}!'.format(hora, soma))
+    separar.close()
+
+menuPrincipal()
+separador()
