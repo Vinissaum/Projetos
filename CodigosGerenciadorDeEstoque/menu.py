@@ -76,5 +76,3 @@ def funcoes(escolha):
 
 bd.CriarTabelaItens()
 menu()
-
-        
