@@ -42,9 +42,12 @@ def subtrairItem():
             if(idcomparar == dado[0]):
                 subtrai = int(input('Quantos itens foram utilizados?: '))
                 quantidade = int(dado[2])
-                quantidade = quantidade - subtrai
-                id_item = idcomparar
-                bd.alterarQuantidade(quantidade, id_item)
+                if(quantidade >= subtrai):
+                    quantidade = quantidade - subtrai
+                    id_item = idcomparar
+                    bd.alterarQuantidade(quantidade, id_item)
+                else:
+                    print('Não há itens suficientes!')
         while True:
             resposta = str(input('Gostaria de subtrair de mais um item?: ')).lower()
             if(resposta == 's' or resposta == 'sim'):
