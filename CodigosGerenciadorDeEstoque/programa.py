@@ -3,11 +3,11 @@ import gerenciar.bd as bd
 def adicionarItem():
     condition = True
     while condition:
-        item = str(input('Insira o nome do item que deseja adicionar: '))
-        quantidade = int(input('Insira a quantidade disponivel desse item: '))
+        item = str(input('\033[1;36;40mInsira o nome do item que deseja adicionar: '))
+        quantidade = int(input('\033[1;36;40mInsira a quantidade disponivel desse item: '))
         bd.inserirItens(item, quantidade)
         while True:
-            resposta = str(input('Gostaria de adicionar mais um item?: ')).lower()
+            resposta = str(input('\033[1;32;40mGostaria de adicionar mais um item?: ')).lower()
             if(resposta == 's' or resposta == 'sim'):
                 condition = True
                 break
@@ -15,16 +15,17 @@ def adicionarItem():
                 condition = False
                 break
             else:
-                print('Escreva se sim ou não!')
+                print('\033[1;31;40mEscreva se sim ou não!')
+                print('\033[0;37;40m')
 
 def alterarItem():
-    id_item = int(input('Digite o id do item que deseja alterar: '))
-    item = str(input('Insira o novo nome do item: '))
+    id_item = int(input('\033[1;36;40mDigite o id do item que deseja alterar: '))
+    item = str(input('\033[1;36;40mInsira o novo nome do item: '))
     bd.alterarItem(id_item, item)
 
 def alterarQtd():
-    id_item = int(input('Digite o id do item que deseja alterar a quantidade: '))
-    quantidade = int(input('Digite a nova quantidade do item: '))
+    id_item = int(input('\033[1;36;40mDigite o id do item que deseja alterar a quantidade: '))
+    quantidade = int(input('\033[1;36;40mDigite a nova quantidade do item: '))
     bd.alterarQuantidade(quantidade, id_item)
 
 def verItens():
@@ -37,19 +38,20 @@ def verItens():
 def subtrairItem():
     condition = True
     while condition:
-        idcomparar = int(input('Digite o Id do item que foi usado: '))
+        idcomparar = int(input('\033[1;36;40mDigite o Id do item que foi usado: '))
         for dado in bd.lerItens():
             if(idcomparar == dado[0]):
-                subtrai = int(input('Quantos itens foram utilizados?: '))
+                subtrai = int(input('\033[1;36;40mQuantos itens foram utilizados?: '))
                 quantidade = int(dado[2])
                 if(quantidade >= subtrai):
                     quantidade = quantidade - subtrai
                     id_item = idcomparar
                     bd.alterarQuantidade(quantidade, id_item)
                 else:
-                    print('Não há itens suficientes!')
+                    print('\033[1;31;40mNão há itens suficientes!')
+                    print('\033[0;37;40m')
         while True:
-            resposta = str(input('Gostaria de subtrair de mais um item?: ')).lower()
+            resposta = str(input('\033[1;32;40mGostaria de subtrair de mais um item?: ')).lower()
             if(resposta == 's' or resposta == 'sim'):
                 condition = True
                 break
@@ -57,22 +59,23 @@ def subtrairItem():
                 condition = False
                 break
             else:
-                print('Escreva se sim ou não!')
+                print('\033[1;31;40mEscreva se sim ou não!')
+                print('\033[0;37;40m')
         
 
 def somaItem():
     condition = True
     while condition:
-        idcomparar = int(input('Digite o Id do item que foi reabastecido: '))
+        idcomparar = int(input('\033[1;36;40mDigite o Id do item que foi reabastecido: '))
         for dado in bd.lerItens():
             if(idcomparar == dado[0]):
-                somar = int(input('Quantos itens foram reabastecidos?: '))
+                somar = int(input('\033[1;36;40mQuantos itens foram reabastecidos?: '))
                 quantidade = int(dado[2])
                 quantidade = quantidade + somar
                 id_item = idcomparar
                 bd.alterarQuantidade(quantidade, id_item)
         while True:
-            resposta = str(input('Gostaria de adicionar a mais um item?: ')).lower()
+            resposta = str(input('\033[1;32;40mGostaria de adicionar a mais um item?: ')).lower()
             if(resposta == 's' or resposta == 'sim'):
                 condition = True
                 break
@@ -80,16 +83,17 @@ def somaItem():
                 condition = False
                 break
             else:
-                print('Escreva se sim ou não!')
+                print('\033[1;31;40mEscreva se sim ou não!')
+                print('\033[0;37;40m')
 
 def excluir():
     condition = True
     verItens()
     while condition:
         try:
-            idenviar = int(input('Digite o id do item que deseja deletar: '))            
+            idenviar = int(input('\033[1;36;40mDigite o id do item que deseja deletar: '))            
         except ValueError:
-            print('Digite um inteiro!')
+            print('\033[1;31;40mDigite um inteiro!')
             condition = True
         else:            
             bd.excluir_item(idenviar)
