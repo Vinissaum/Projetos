@@ -39,14 +39,17 @@ def escolher():
 def funcoes(escolha):
     if(escolha == 1):        
         prog.adicionarItem()
+        print('\033[0;37;40m')
         menu()
     elif(escolha == 2):
         prog.verItens()
         prog.subtrairItem()
+        print('\033[0;37;40m')
         menu()
     elif(escolha == 3):
         prog.verItens()
         prog.somaItem()
+        print('\033[0;37;40m')
         menu()
     elif(escolha == 4):
         while True:
@@ -60,18 +63,22 @@ def funcoes(escolha):
                 prog.alterarQtd()
                 break
             else:
-                print('Escolha uma opção válida!')
+                print('\033[1;31;40mEscolha uma opção válida!')
+                print('\033[0;37;40m')
         menu()
     elif(escolha == 5):        
         prog.excluir()
+        print('\033[0;37;40m')
         menu()
     elif(escolha == 6):
+        print('\033[0;37;40m')
         prog.verItens()
         menu()
     elif(escolha == 7):
         print('saindo...')
     else:
-        print('Digite uma opção válida!')
+        print('\033[1;31;40mDigite uma opção válida!')
+        print('\033[0;37;40m')
         escolher()
 
 bd.CriarTabelaItens()
