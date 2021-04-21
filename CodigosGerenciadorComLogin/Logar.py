@@ -35,5 +35,6 @@ def escolha():
         print('Opção inválida! Por favor, escolha uma opção válida! Opções Válidas [//1 - Cadastrar//2 - Logar//3 - Sair//]')
         escolha()
 
+bd.criarTabelaJogo()
 bd.criarTabelaJogador()
 logar()
