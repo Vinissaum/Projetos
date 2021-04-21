@@ -309,13 +309,12 @@ def validarUsuario():
                     validar = False
                     print('Você se logou!')
                     id_usuario = int(dado[0])
+                    men.menu(usuario, id_usuario, senha)
                     break
                 else:
                     incorreto = int(1)
-                    validar = True
-        men.menu(usuario, id_usuario, senha)
+                    validar = True        
         condition = False
 
 def excluirUsuario(id_jogador):
     bd.excluirJogador(id_jogador)
-
