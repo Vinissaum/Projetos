@@ -25,16 +25,20 @@ def menu(usuario, id_usuario, senha):
     traco()
     id_jogador = int(id_usuario)
     senhacomparar = senha
-    escolha(id_jogador,senhacomparar)
+    usuario = usuario
+    id_usuario = id_usuario
+    senha = senha
+    escolha(id_jogador,senhacomparar,usuario,id_usuario,senha)
 
-def escolha(id_jogador,senhacomparar):
+
+def escolha(id_jogador, senhacomparar, usuario, id_usuario, senha):
     escolhe = str(input('O que gostaria de fazer?: ')).lower().strip()
     if(escolhe == '1' or escolhe == 'cadastrar' or escolhe == 'cadastrarjogo' or escolhe =='cadastrarjogos'):
         prog.addJogo()
-        menu()
+        menu(usuario,id_usuario,senha)
     elif(escolhe == '2' or escolhe == 'ver' or escolhe == 'verjogo' or escolhe == 'verjogos'):
         prog.verJogo()
-        menu()
+        menu(usuario, id_usuario, senha)
     elif(escolhe == '3' or escolhe == 'alterar' or escolhe == 'alterarjogo' or escolhe == 'alterarjogos'):
         traco()
         print('1 - Nome\n2 - Horas Jogadas\n3 - Conquistas\n4 - Finalizado')
@@ -43,25 +47,25 @@ def escolha(id_jogador,senhacomparar):
             alterar = str(input('O que gostaria de alterar em Jogo?: ')).lower().strip()
             if(alterar == '1' or alterar == 'nome'):
                 prog.trocarNomeJogo()
-                menu()
+                menu(usuario, id_usuario, senha)
                 break
             elif(alterar == '2' or alterar == 'horas' or alterar == 'horasjogadas'):
                 prog.trocarTempojogadoJogo()
-                menu()
+                menu(usuario, id_usuario, senha)
                 break
             elif(alterar == '3' or alterar == 'conquistas' or alterar == 'conquista'):
                 prog.trocarConquistasJogo()
-                menu()
+                menu(usuario, id_usuario, senha)
                 break
             elif(alterar == '4' or alterar == 'finalizado'):
                 prog.trocarFinalizadoJogo()
-                menu()
+                menu(usuario, id_usuario, senha)
                 break
             else:
                 print('Opção inválida! Por favor, escolha uma opção válida! Opções Válidas [//1 - Nome//2 - Horas Jogadas//3 - Conquistas//4 - Finalizado//]')
     elif(escolhe == '4' or escolhe == 'excluir' or escolhe == 'excluirjogo'):
         prog.excluirJogo()
-        menu()
+        menu(usuario, id_usuario, senha)
     elif(escolhe == '5' or escolhe == 'opcoes' or escolhe == 'opcoesdeusuario' or escolhe == 'opcoesusuario' or escolhe == 'opções' or escolhe == 'opçõesdeusuario' or escolhe == 'opçõesusuario' or escolhe == 'opcoesusuário' or escolhe == 'opcoesdeusuário' or escolhe == 'opçõesdeusuário' or escolhe == 'opçõesusuário'):
         traco()
         print('1 - Alterar nome de usuario\n2 - Alterar senha\n3 - EXCLUIR USUARIO')
