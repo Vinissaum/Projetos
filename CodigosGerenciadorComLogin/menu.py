@@ -169,6 +169,7 @@ def escolha(id_jogador, senhacomparar, usuario, id_usuario, senha):
                             validar = True
                 print('Gerando Relatorio...\n')
                 prog.verJogoData(date)
+                menu(usuario, id_jogador, senha)
                 break
             elif(relatorio == '2' or relatorio == 'nome' or relatorio == 'nomeusuario' or relatorio == 'nomedeusuario'):
                 validar = True
@@ -188,6 +189,7 @@ def escolha(id_jogador, senhacomparar, usuario, id_usuario, senha):
                             validar = True
                 print('Gerando Relatório...\n')            
                 prog.verJogoUsuarioRelatorio(usuariorelatorio)
+                menu(usuario, id_jogador, senha)
                 break
             elif(relatorio == '3' or relatorio == 'jogofinalizado' or relatorio == 'finalizado'):            
                 while True:
@@ -202,6 +204,7 @@ def escolha(id_jogador, senhacomparar, usuario, id_usuario, senha):
                         print('Opção inválida! Por favor digite uma opção válida! Opções válidas: [finalizado/não finalizado]')
                 print('Gerando Relatório...\n')
                 prog.verJogoFinalizado(fim)
+                menu(usuario, id_jogador, senha)
                 break
             else:
                 print('Opção inválida! Por favor, digite uma opção válida! Opções válidas: [//1 - Data de criação//2 - Nome de Usuario//3 - Jogo finalizado ou não//]')            
