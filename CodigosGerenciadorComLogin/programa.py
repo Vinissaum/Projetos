@@ -1,7 +1,11 @@
 import jogos.bd as bd
 import jogos.menu as men
+relatorioUsuario = './jogos/relatorios/NomeDeUsuario.txt'
+relatorioData = './jogos/relatorios/DataCriacao.txt'
+relatorioFinalizado = './jogos/relatorios/Finalizado.txt'
 
-def addJogo():
+
+def addJogo(usuario):
     condition = True
     while condition:
         while True:
@@ -44,7 +48,9 @@ def addJogo():
                 break
             else:
                 print('Opção inválida! Por favor digite uma opção válida! Opções válidas: [sim/não]')
-        bd.inserirJogo(nome,tempojogado,conquistas,finalizado)
+        from datetime import datetime
+        data = datetime.now().strftime('%d/%m/%Y')
+        bd.inserirJogo(usuario,nome,tempojogado,conquistas,finalizado,data)
         while True:
             resposta = str(input('Gostaria de inserir mais um jogo?: ')).lower()
             if(resposta == 's' or resposta == 'sim'):
@@ -56,17 +62,73 @@ def addJogo():
             else:
                 print('Opção inválida! Por favor digite uma opção válida! Opções válidas: [sim/não]')
 
-def verJogo():
+def verJogoLogado(usuario):
     for dado in bd.exibirJogo():
-        final = int(dado[4])
+        final = int(dado[5])
         if(final == 1):
             finalizado = 'Sim'
         elif(final == 0):
             finalizado = 'Não'
-        print('ID: {}\nNome: {}\nTempo Jogado: {}\nConquistas: {}\nFinalizado?: {}\n'.format(dado[0],dado[1],dado[2],dado[3],finalizado))
+        compararusuario = str(dado[1])
+        if(usuario == compararusuario):
+            print('Adicionado por: {}\nNome: {}\nTempo Jogado: {}\nConquistas: {}\nFinalizado?: {}\n'.format(dado[1],dado[2],dado[3],dado[4],finalizado))
+
+def verJogoUsuarioRelatorio(usuariorelatorio):
+    for dado in bd.exibirJogo():
+        final = int(dado[5])
+        if(final == 1):
+            finalizado = 'Sim'
+        elif(final == 0):
+            finalizado = 'Não'
+        compararusuario = str(dado[1])
+        if(usuariorelatorio == compararusuario):
+            print('Adicionado por: {}\nNome: {}\nTempo Jogado: {}\nConquistas: {}\nFinalizado?: {}\n'.format(dado[1],dado[2],dado[3],dado[4],finalizado))
+            relatorio  = open(relatorioUsuario, 'a', encoding= 'UTF-8')
+            relatorio.writelines('Adicionado por: {}\nNome: {}\nTempo Jogado: {}\nConquistas: {}\nFinalizado?: {}\n'.format(dado[1],dado[2],dado[3],dado[4],finalizado))
+            relatorio.write("\n")
+            relatorio.close()
+
+def verJogoSemParametro():
+    for dado in bd.exibirJogo():
+        final = int(dado[5])
+        if(final == 1):
+            finalizado = 'Sim'
+        elif(final == 0):
+            finalizado = 'Não'        
+        print('ID: {}\nAdicionado por: {}\nNome: {}\nTempo Jogado: {}\nConquistas: {}\nFinalizado?: {}\n'.format(dado[0],dado[1],dado[2],dado[3],dado[4],finalizado))
+
+def verJogoFinalizado(fim):
+    for dado in bd.exibirJogo():
+        final = int(dado[5])
+        if(final == 1):
+            finalizado = 'Sim'
+        elif(final == 0):
+            finalizado = 'Não'
+        compararfinalizado = str(finalizado)
+        if(fim == compararfinalizado):
+            print('Finalizado?: {}\nNome: {}\nTempo Jogado: {}\nConquistas: {}\n'.format(finalizado,dado[2],dado[3],dado[4]))
+            relatorio = open(relatorioFinalizado, 'a' ,encoding= 'UTF-8')
+            relatorio.writelines('Finalizado?: {}\nNome: {}\nTempo Jogado: {}\nConquistas: {}\n'.format(finalizado,dado[2],dado[3],dado[4]))
+            relatorio.write("\n")
+            relatorio.close()
+
+def verJogoData(date):
+    for dado in bd.exibirJogo():
+        final = int(dado[5])
+        if(final == 1):
+            finalizado = 'Sim'
+        elif(final == 0):
+            finalizado = 'Não'
+        comparardata = str(dado[6])
+        if(date == comparardata):
+            print('Adicionado em: {}\nNome: {}\nTempo Jogado: {}\nConquistas: {}\nFinalizado?: {}\n'.format(dado[6],dado[2],dado[3],dado[4],finalizado))
+            relatorio = open(relatorioData, 'a', encoding= 'UTF-8')
+            relatorio.writelines('Adicionado em: {}\nNome: {}\nTempo Jogado: {}\nConquistas: {}\nFinalizado?: {}\n'.format(dado[6],dado[2],dado[3],dado[4],finalizado))
+            relatorio.write("\n")
+            relatorio.close()
 
 def trocarNomeJogo():
-    verJogo()
+    verJogoSemParametro()
     condition = True
     while condition:
         while True:
@@ -97,7 +159,7 @@ def trocarNomeJogo():
                 print('Opção inválida! Por favor digite uma opção válida! Opções válidas: [sim/não]')
 
 def trocarTempojogadoJogo():
-    verJogo()
+    verJogoSemParametro()
     condition = True
     while condition:
         while True:
@@ -128,7 +190,7 @@ def trocarTempojogadoJogo():
                 print('Opção inválida! Por favor digite uma opção válida! Opções válidas: [sim/não]')
 
 def trocarConquistasJogo():
-    verJogo()
+    verJogoSemParametro()
     condition = True
     while condition:
         while True:
@@ -158,7 +220,7 @@ def trocarConquistasJogo():
                 print('Opção inválida! Por favor digite uma opção válida! Opções válidas: [sim/não]')
 
 def trocarFinalizadoJogo():
-    verJogo()
+    verJogoSemParametro()
     condition = True
     while condition:
         while True:
@@ -193,7 +255,7 @@ def trocarFinalizadoJogo():
                 print('Opção inválida! Por favor digite uma opção válida! Opções válidas: [sim/não]')
 
 def excluirJogo():
-    verJogo()
+    verJogoSemParametro()
     condition = True
     while condition:
         while True:
@@ -308,13 +370,13 @@ def validarUsuario():
                 if(usuariocomparar == usuario and senhacomparar == senha):
                     validar = False
                     print('Você se logou!')
-                    id_usuario = int(dado[0])
-                    men.menu(usuario, id_usuario, senha)
+                    id_usuario = int(dado[0])                    
                     break
                 else:
                     incorreto = int(1)
                     validar = True        
-        condition = False
+        men.menu(usuario, id_usuario, senha)
+        condition = False        
 
 def excluirUsuario(id_jogador):
     bd.excluirJogador(id_jogador)

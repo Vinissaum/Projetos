@@ -6,13 +6,15 @@ cursor = conn.cursor()
 def criarTabelaJogo():
     conn.execute("""create table if not exists Jogo(
                 id_jogo integer primary key autoincrement,
+                usuario txt not null,
                 nome text not null,
                 tempojogado float not null,
                 conquistas int,
-                finalizado int)""")
+                finalizado int,
+                data txt not null)""")
 
-def inserirJogo(nome, tempojogado, conquistas, finalizado):
-    conn.execute('insert into Jogo (nome,tempojogado,conquistas,finalizado) values(?,?,?,?)',(nome,tempojogado,conquistas,finalizado))
+def inserirJogo(usuario, nome, tempojogado, conquistas, finalizado,data):
+    conn.execute('insert into Jogo (usuario,nome,tempojogado,conquistas,finalizado,data) values(?,?,?,?,?,?)',(usuario, nome,tempojogado,conquistas,finalizado,data))
     conn.commit()
 
 def exibirJogo():
