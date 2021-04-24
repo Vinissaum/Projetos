@@ -147,7 +147,14 @@ def escolha(id_jogador, senhacomparar, usuario, id_usuario, senha):
                 exit()
     elif(escolhe == '6' or escolhe == 'gerar' or escolhe == 'gerarrelatorio' or escolhe == 'relatorio'):        
         while True:
-            relatorio = str(input('Escolha qual tipo de relatório deseja gerar: [//1 - Data de criação//2 - Nome de Usuario//3 - Jogo finalizado ou não//]: ')).lower().strip()
+            disponivel = 'TIPOS DE RELATORIOS DISPONÍVEIS'
+            relatoriosdisponiveis = '1 - Data de Criação\n2 - Nome de Usuário\n3 - Jogo Finalizado/Não Finalizado'
+            traco()
+            print(disponivel.center(50))
+            traco()
+            print(relatoriosdisponiveis)
+            traco()
+            relatorio = str(input('Escolha qual tipo de relatório deseja gerar: ')).lower().strip()
             if(relatorio == '1' or relatorio == 'data' or relatorio == 'datacriacao'):
                 validar = True
                 msg = int(0)
