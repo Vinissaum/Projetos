@@ -37,7 +37,7 @@ def atualizarFinalizadoJogo(finalizado, id_jogo):
     conn.commit()
 
 def deletarJogo(id_jogo):
-    conn.execute('delete from Jogo where id_jogo = ?',(id_jogo))
+    conn.execute('delete from Jogo where id_jogo = ?',(id_jogo, ))
     conn.commit()
 
 def criarTabelaJogador():
