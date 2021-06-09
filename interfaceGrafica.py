@@ -3,16 +3,6 @@ from tkinter import messagebox as msgb
 from tkinter import ttk as ttk
 import sqlite3
 
-root = Tk()
-subject = StringVar()
-grade = DoubleVar()
-grade2 = DoubleVar()
-average = DoubleVar()
-result = StringVar()
-
-id = None
-insertWindow = None
-updateWindow = None
 
 def database():
     conn = sqlite3.connect('./Notas.db')
@@ -81,7 +71,7 @@ def deleteData():
 def updateData():
     tree.delete(*tree.get_children())
     average.set((grade.get()+grade2.get())/2)
-    if average.get() > 6:
+    if average.get() >= 6:
         result.set("Aprovado")
     else:
         result.set("Reprovado")
@@ -142,7 +132,7 @@ def submitData():
     else:
         tree.delete(*tree.get_children())
         average.set((grade.get()+grade2.get())/2)
-        if average.get() > 6:
+        if average.get() >= 6:
             result.set("Aprovado")
         else:
             result.set("Reprovado")
@@ -189,6 +179,15 @@ def insertData():
     bttnInsert.grid(row=4, columnspan=2, pady=10)
     insertWindow.mainloop()
 
+root = Tk()
+subject = StringVar()
+grade = DoubleVar()
+grade2 = DoubleVar()
+average = DoubleVar()
+result = StringVar()
+id = None
+insertWindow = None
+updateWindow = None
 root.title('Gerenciador de notas')
 width = 1024
 height = 600
@@ -238,7 +237,5 @@ tree.column('#4', stretch=NO, minwidth=0, width=155)
 tree.column('#5', stretch=NO, minwidth=0, width=155)
 tree.pack()
 tree.bind('<Double-Button-1>', onSelected)
-
-if __name__ == '__main__':
-    database()
-    root.mainloop()
+database()
+root.mainloop()
