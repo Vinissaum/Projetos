@@ -132,6 +132,7 @@ def validateData():
         grade2.get()
     except:
         msgb.showwarning("Tipo inválido!", "Por favor, insira um tipo válido!")
+        insertWindow.destroy()
         insertData()
     else:
         submitData()
@@ -141,7 +142,8 @@ def validateDataUpdate():
         grade.get()
         grade2.get()
     except:
-        msgb.showwarning("Tipo inválido!", "Por favor, insira um tipo válido!")        
+        msgb.showwarning("Tipo inválido!", "Por favor, insira um tipo válido!")
+        updateWindow.destroy()
     else:
         updateData()
 
@@ -166,6 +168,7 @@ def insertData():
     subject.set("")
     grade.set("")
     grade2.set("")
+    global insertWindow    
     insertWindow = Toplevel()
     insertWindow.title("Inserir Nota")
     width = 480
