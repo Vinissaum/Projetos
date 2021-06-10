@@ -122,9 +122,28 @@ def onSelected(event):
     notaEntry.grid(row=1, column=1)
     nota2Entry = Entry(registerContact, textvariable=grade2,font=('arial', 12))
     nota2Entry.grid(row=2, column=1)
-    bttnInsert = Button(registerContact, text="Atualizar dados", bg="#c98654", width=50, command=updateData)
+    bttnInsert = Button(registerContact, text="Atualizar dados", bg="#c98654", width=50, command=validateDataUpdate)
     bttnInsert.grid(row=4, columnspan=2, pady=10)
     insertWindow.mainloop()
+
+def validateData():
+    try:
+        grade.get()
+        grade2.get()
+    except:
+        msgb.showwarning("Tipo inválido!", "Por favor, insira um tipo válido!")
+        insertData()
+    else:
+        submitData()
+
+def validateDataUpdate():
+    try:
+        grade.get()
+        grade2.get()
+    except:
+        msgb.showwarning("Tipo inválido!", "Por favor, insira um tipo válido!")        
+    else:
+        updateData()
 
 def submitData():
     if grade.get() == None or subject.get() == "" or grade2.get() == None:
@@ -175,7 +194,7 @@ def insertData():
     notaEntry.grid(row=1, column=1)
     nota2Entry = Entry(registerContact, textvariable=grade2, font=('arial', 12))
     nota2Entry.grid(row=2, column=1)
-    bttnInsert = Button(registerContact, text="Inserir dados",bg="#acc954", width=50, command=submitData)
+    bttnInsert = Button(registerContact, text="Inserir dados",bg="#acc954", width=50, command=validateData)
     bttnInsert.grid(row=4, columnspan=2, pady=10)
     insertWindow.mainloop()
 
