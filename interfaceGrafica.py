@@ -97,7 +97,6 @@ def updateData():
     AVD.set("")
     AVDS.set("")
     average.set("")
-    result.set("")
     updateWindow.destroy()
 
 def onSelected(event):
@@ -115,7 +114,7 @@ def onSelected(event):
     updateWindow = Toplevel()
     updateWindow.title("Atualizar notas")
     width = 480
-    height = 400
+    height = 270
     sc_width = updateWindow.winfo_screenwidth()
     sc_height = updateWindow.winfo_screenheight()
     x = (sc_width/2) - (width/2)
@@ -126,6 +125,9 @@ def onSelected(event):
     registerTitle.pack(side=TOP)
     registerContact = Frame(updateWindow)
     registerContact.pack(side=TOP, pady=10)
+    registerWarning = Frame(updateWindow)
+    registerWarning.pack(side=BOTTOM)
+    lblWarning = Label(registerWarning, text="Se não tiver feito a avaliação, deixe como zero!", font=("consolas", 15), bg="#d1ad5e", width=200)
     lblTitle = Label(registerTitle, text="Atualize os dados",font=("consolas", 25), bg="#7cbb63", width=300)
     lblTitle.pack(fill=X)
     lblsubject = Label(registerContact, text="Insira a materia", font=("consolas", 11))
@@ -153,7 +155,7 @@ def onSelected(event):
     AVDSEntry = Entry(registerContact, textvariable=AVDS, font=('arial', 12))
     AVDSEntry.grid(row=5, column=1)
     bttnInsert = Button(registerContact, text="Atualizar dados", bg="#c98654", width=50, command=validateDataUpdate)
-    bttnInsert.grid(row=7, columnspan=2, pady=10)
+    bttnInsert.grid(row=7, columnspan=2, pady=10)    
     insertWindow.mainloop()
 
 def validateData():
@@ -211,26 +213,25 @@ def submitData():
             result = 'REPROVADO'
         insertNota(subject.get(),nota1, nota2, nota3, average.get(), result)
         subject.set("")
-        AV1.set("")
-        AV2.set("")
-        AV3.set("")
-        AVD.set("")
-        AVDS.set("")
+        AV1.set(0)
+        AV2.set(0)
+        AV3.set(0)
+        AVD.set(0)
+        AVDS.set(0)
         average.set("")
-        result.set("")
 
 def insertData():
     subject.set("")
-    AV1.set("")
-    AV2.set("")
-    AV3.set("")
-    AVD.set("")
-    AVDS.set("")
+    AV1.set(0)
+    AV2.set(0)
+    AV3.set(0)
+    AVD.set(0)
+    AVDS.set(0)
     global insertWindow    
     insertWindow = Toplevel()
     insertWindow.title("Inserir Nota")
     width = 480
-    height = 400
+    height = 270
     sc_width = insertWindow.winfo_screenwidth()
     sc_height = insertWindow.winfo_screenheight()
     x = (sc_width/2) - (width/2)
@@ -241,6 +242,10 @@ def insertData():
     registerTitle.pack(side=TOP)
     registerContact = Frame(insertWindow)
     registerContact.pack(side=TOP, pady=10)
+    registerWarning = Frame(insertWindow)
+    registerWarning.pack(side=BOTTOM)
+    lblWarning = Label(registerWarning, text="Se não tiver feito a avaliação, deixe como zero!", font=("consolas", 12), bg="#d1ad5e", width=200)
+    lblWarning.pack(fill=X)
     lblTitle = Label(registerTitle, text="Insira os dados",font=("consolas", 25), bg="#7cbb63", width=300)
     lblTitle.pack(fill=X)
     lblsubject = Label(registerContact, text="Insira a materia", font=("consolas", 11))
